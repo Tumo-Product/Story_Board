@@ -1,4 +1,4 @@
-# hello-world
+# Story_Board_Plugin
 
 ## Project setup
 ```
