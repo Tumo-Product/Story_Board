@@ -1,4 +1,4 @@
-# hello-world
+# Story Board Plugin
 
 ## Project setup
 ```
