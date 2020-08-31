@@ -15,7 +15,8 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/main.js',
-      title: 'Index Page'
+      title: 'Index Page',
+      chunks: ['chunk-vendors', 'chunk-common', 'index']
     },
     editor: {
       entry: 'src/editor/main.js',
@@ -29,6 +30,7 @@ module.exports = {
       entry: 'src/examiner/main.js',
       title: 'Examiner Page',
     }
-  }
+  },
+  publicPath: '/Story_Board_Host'
 
 }
