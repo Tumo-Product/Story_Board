@@ -1,24 +1,26 @@
 <template>
-    <div class="story-board-editor-container">
-        <div class="story-board-editor-panels-count-container">
-            <p class="story-board-editor-panels-count-text">Panels</p>
+    <v-app>
+        <div ref="storyBoardEditor" class="story-board-editor-container">
+            <div class="story-board-editor-panels-count-container">
+                <p class="story-board-editor-panels-count-text">Panels</p>
 
-            <div class="story-board-editor-panels-count">
-                <v-radio-group v-model="content.panels" row>
-                    <v-radio
-                        v-for="panel in panelsMaximumCount"
-                        :key="panel"
-                        :label="`${panel}`"
-                        :value="panel"
-                    ></v-radio>
-                </v-radio-group>
+                <div class="story-board-editor-panels-count">
+                    <v-radio-group v-model="content.panels" row>
+                        <v-radio
+                            v-for="panel in panelsMaximumCount"
+                            :key="panel"
+                            :label="`${panel}`"
+                            :value="panel"
+                        ></v-radio>
+                    </v-radio-group>
+                </div>
             </div>
+
+            <Foreground :content="content" @setContent="setContent"/>
+
+            <Background :content="content" />
         </div>
-
-        <Foreground :content="content" @setContent="setContent"/>
-
-        <Background :content="content" />
-    </div>
+    </v-app>
 </template>
 
 <script>
@@ -72,6 +74,12 @@ export default {
             message: 'init'
         }, '*');
 
+         window.parent.postMessage({
+            application: 'activity-manager',
+            message: 'set-iframe-height',
+            data: { iframeHeight: this.$refs.storyBoardEditor.scrollHeight }
+        }, '*');
+
 
         window.addEventListener('message', event => {
             const inst = this;
@@ -94,7 +102,6 @@ export default {
 <style lang="scss">
 
 .story-board-editor-container {
-    margin: 10px;
     height: 500px;
     display: flex;
     justify-content: flex-start;

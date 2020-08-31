@@ -154,7 +154,7 @@ export default {
 
 <style lang="scss">
 
-.story-board-viewer-preview-dialog-container {
+#app .story-board-viewer-preview-dialog-container {
     width: 1000px;
     display: flex;
     flex-wrap: wrap;

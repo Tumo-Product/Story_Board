@@ -1,15 +1,17 @@
 <template>
-    <div class="story-board-viewer">
-        <div class="story-board-viewer-main">
-            <Board />
+    <v-app>
+        <div ref="storyBoardViewer" class="story-board-viewer">
+            <div class="story-board-viewer-main">
+                <Board />
 
-            <div class="story-board-viewer-board-images">
-                <Panels />
+                <div class="story-board-viewer-board-images">
+                    <Panels />
 
-                <Images />
+                    <Images />
+                </div>
             </div>
         </div>
-    </div>
+    </v-app>
 </template>
 
 <script>
@@ -66,6 +68,12 @@ export default {
             message: 'init'
         }, '*');
 
+        window.parent.postMessage({
+            application: 'activity-manager',
+            message: 'set-iframe-height',
+            data: { iframeHeight: this.$refs.storyBoardViewer.scrollHeight }
+        }, '*');
+
         window.addEventListener('message', event => {
             const inst = this;
             if(event.data.application !== 'activity-manager') return;
@@ -90,6 +98,24 @@ export default {
 </script>
 
 <style lang="scss">
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #fafafa;
+}
+
 .story-board-viewer {
     border: 1px solid #ccc;
     width: 100%;

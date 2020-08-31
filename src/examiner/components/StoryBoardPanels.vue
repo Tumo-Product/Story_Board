@@ -1,5 +1,5 @@
 <template>
-    <div class="story-board-examiner-preview-container">
+    <div ref="storyBoardExaminer" class="story-board-examiner-preview-container">
         <div
             v-for="(panel, index) in content.panels"
             :key="panel"
@@ -59,12 +59,18 @@ export default {
     },
 
     watch: {
-        answers() {
-             this.$nextTick(()=>{
+         answers() {
+            this.$nextTick(()=>{
                 for (let index = 0; index < this.content.panels; index++) {
                     this.canvasSetup(this.answers[index]);
                     new P5(this.sketch, `examinerStoryBoard${index}`);
                 }
+
+                window.parent.postMessage({
+                    application: 'activity-manager',
+                    message: 'set-iframe-height',
+                    data: { iframeHeight: this.$refs.storyBoardExaminer.scrollHeight }
+                }, '*');
             })
         }
     },
@@ -147,6 +153,7 @@ export default {
     margin-left: 5px;
     border: 1px solid #ccc;
     width: 485px;
+    height: 390px;
     margin-bottom: 10px;
 }
 

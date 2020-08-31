@@ -1,7 +1,9 @@
 <template>
-    <div class="story-board-viewer">
-       <StoryBoardPanels :content="content" :answers="answers" />
-    </div>
+    <v-app>
+        <div class="story-board-examiner">
+            <StoryBoardPanels :content="content" :answers="answers" />
+        </div>
+    </v-app>
 </template>
 
 <script>
@@ -43,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss">
-.story-board-viewer {
+.story-board-examiner {
     border: 1px solid #ccc;
     width: 100%;
 }

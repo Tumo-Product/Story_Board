@@ -223,7 +223,7 @@ export default {
     border-radius: 10px;
 }
 
-.story-board-editor-foreground-checkbox {
+#app .story-board-editor-foreground-checkbox {
     margin-left: 10px;
     margin-top: 0;
     padding-top: 7px;

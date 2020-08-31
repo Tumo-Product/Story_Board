@@ -1,6 +1,8 @@
 <template>
   <v-app>
-    <router-view/>
+    <div class="info-text">
+      This plugin working only with activity manager.
+    </div>
   </v-app>
 </template>
 
@@ -12,19 +14,9 @@ export default {
 </script>
 
 <style>
-::-webkit-scrollbar {
-        width: 0px;
-        height: 8px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #888;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-    ::-webkit-scrollbar-track {
-        background-color: #fafafa;
-    }
+  .info-text {
+    margin-top: 300px;
+    text-align: center;
+    font-size: 22px;
+  }
 </style>
