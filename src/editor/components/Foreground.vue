@@ -1,13 +1,13 @@
 <template>
     <div class="story-board-editor-foreground-container">
         <div class="story-board-editor-foreground">
-            <p class="story-board-editor-foreground-name">Foreground</p>
+            <p class="story-board-editor-foreground-name">{{ $t('foreground') }}</p>
 
             <div class="story-board-editor-foreground-checkbox-container">
                 <v-checkbox
                     disabled
                     class="story-board-editor-foreground-checkbox"
-                    label="Enable Student Upload"
+                    :label="$t('enable-student-upload')"
                     v-model="content.foregroundEnableUpload"
                 ></v-checkbox>
             </div>
@@ -31,13 +31,12 @@
                 <div>
                     <v-btn
                         v-if="activeCategories === categoryName"
-                        class="story-board-editor-foreground-select-all-butoon"
-                        :class="selectAllButoonStatus"
+                        :class="['story-board-editor-foreground-select-all-butoon', selectAllButoonStatus]"
                         text
                         small
                         @click="selectCategoryAllImages(categoryName)"
                     >
-                        Select all
+                        {{ $t('select-all') }}
                     </v-btn>
 
                     <v-btn icon @click="openCategory(categoryName)">
@@ -250,7 +249,7 @@ export default {
     color: blue;
 }
 
-.story-board-editor-foreground-select-all-butoon {
+#app .story-board-editor-foreground-select-all-butoon {
     margin-right: 10px;
     text-transform: capitalize;
 }

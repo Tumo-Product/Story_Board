@@ -1,13 +1,13 @@
 <template>
     <div class="story-board-editor-background-container">
         <div class="story-board-editor-background">
-            <p class="story-board-editor-background-name">Background</p>
+            <p class="story-board-editor-background-name">{{ $t('background') }}</p>
 
             <div class="story-board-editor-background-checkbox-container">
                 <v-checkbox
                     disabled
                     class="story-board-editor-background-checkbox"
-                    label="Enable Student Upload"
+                    :label="$t('enable-student-upload')"
                     v-model="content.backgroundEnableUpload"
                 ></v-checkbox>
             </div>
@@ -21,7 +21,7 @@
                     :class="['story-board-editor-background-select-all-butoon', selectAllButoonClass]"
                     @click="selectAllImages"
                 >
-                    Select all
+                    {{ $t('select-all') }}
                 </v-btn>
             </div>
 

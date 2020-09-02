@@ -2,7 +2,7 @@
     <v-app>
         <div ref="storyBoardEditor" class="story-board-editor-container">
             <div class="story-board-editor-panels-count-container">
-                <p class="story-board-editor-panels-count-text">Panels</p>
+                <p class="story-board-editor-panels-count-text">{{ $t("panels") }}</p>
 
                 <div class="story-board-editor-panels-count">
                     <v-radio-group v-model="content.panels" row>
@@ -92,6 +92,7 @@ export default {
                     else {
                         inst.setContent(inst.content);
                     }
+                    this.$i18n.locale = event.data.data.language;
                 break;
             }
         });

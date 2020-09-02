@@ -1,3 +1,7 @@
 {
-  "message": "hello i18n !!"
+  "background": "Ետնաշերտեր",
+  "foreground": "Կերպարներ",
+  "enable-student-upload": "Միացնել ուսանողների վերբեռնումը",
+  "select-all": "Նշել Բոլորը",
+  "panels": "Վահանակներ"
 }
