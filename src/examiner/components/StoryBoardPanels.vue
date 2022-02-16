@@ -61,17 +61,19 @@ export default {
     watch: {
          answers() {
             this.$nextTick(()=>{
-                for (let index = 0; index < this.content.panels; index++) {
+                    for (let index = 0; index < this.content.panels; index++) {
                     this.canvasSetup(this.answers[index]);
                     new P5(this.sketch, `examinerStoryBoard${index}`);
                 }
-
+            })
+            // TODO  delete setTimeout
+            setTimeout(() => {
                 window.parent.postMessage({
                     application: 'activity-manager',
                     message: 'set-iframe-height',
                     data: { iframeHeight: this.$refs.storyBoardExaminer.scrollHeight }
                 }, '*');
-            })
+            }, 300)
         }
     },
 

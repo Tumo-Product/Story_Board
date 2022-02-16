@@ -10,6 +10,10 @@
 
 export default {
   name: 'App',
+
+  mounted() {
+    console.log('version-2')
+  }
 };
 </script>
 
