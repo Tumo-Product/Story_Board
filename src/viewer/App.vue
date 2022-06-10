@@ -9,4 +9,10 @@ import Store from "@/Store.vue";
   <UserFrames v-if="Store.start_frame.value" />
 </template>
 
-<style></style>
+<style>
+@font-face {
+  font-family: "Fedra Sans Alt Pro";
+  src: local("Fedra Sans Alt Pro"),
+    url(./../fonts/Fedra/FedraSansAltPro-Medium.otf) format("truetype");
+}
+</style>
