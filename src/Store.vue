@@ -1,23 +1,25 @@
 <script>
 import { ref } from "vue";
 const Store = {
-  //For start button
-  start_frame: ref(false),
-  classes: {
-    active_all: ref(true),
-  },
+  animate_button: ref(false),
+  start: ref(false),
+  edit_mode: ref(false),
+  view_mode: ref(false),
   boards: {
-    board_1: ref(false),
-    board_2: ref(false),
-    board_3: ref(false),
-    board_4: ref(false),
-    board_5: ref(false),
-    board_6: ref(false),
+    1: { objects: {}, content: "" },
+    2: { objects: {}, content: "" },
+    3: { objects: {}, content: "" },
+    4: { objects: {}, content: "" },
+    5: { objects: {}, content: "" },
+    6: { objects: {}, content: "" },
   },
-};
-
-export const toogle_board_class = (id) => {
-  Store.boards[id].value = !Store.boards[id].value;
+  categories: [
+    { name: "background", state: ref(true) },
+    { name: "background_assets", state: ref(false) },
+    { name: "objcets", state: ref(false) },
+    { name: "characters", state: ref(false) },
+  ],
+  MAX_INPUT_LENGTH: 200,
 };
 
 export default Store;

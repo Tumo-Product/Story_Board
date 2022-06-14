@@ -1,53 +1,59 @@
 <template>
   <main>
     <!-- Change class names!!!-->
-    <div class="starting_area" :class="{ slide_down: animate_button }">
-      <div class="tool_name" :class="{ hide: animate_button }">
+    <div
+      class="starting_area"
+      :class="{ slide_down: Store.animate_button.value }"
+    >
+      <FirstFrame v-if="first_usage" />
+      <EditBoard v-if="Store.edit_mode.value" />
+
+      <div class="tool_name" :class="{ hide: Store.animate_button.value }">
         <h1>Story Telling</h1>
       </div>
     </div>
+
     <div
       class="button_area"
-      :class="{ slide_down_button_area: animate_button }"
+      :class="{ slide_down_button_area: Store.animate_button.value }"
     >
       <button
+        class="start"
         @click="on_start_button_click"
-        :class="{ to_circle: animate_button }"
+        :class="{ to_circle: Store.animate_button.value }"
       >
         <img
           src="./../assets/icons/button_arrow.svg"
           alt=""
-          v-if="!animate_button"
+          v-if="!Store.animate_button.value"
         />
       </button>
+      <ViewButton />
+      <ArrowButtons />
     </div>
   </main>
 </template>
 
 <script setup>
-import { ref } from "vue";
-// import Store from "@/Store.vue";
-let animate_button = ref(false);
+import Store from "@/Store.vue";
+import FirstFrame from "./FirstFrame";
+import EditBoard from "./EditBoard";
+import ViewButton from "./ViewButton";
+import ArrowButtons from "./ArrowButtons";
+
+//Testing values need to be deleted
+let first_usage = true;
+//END OF TESTING VALUES
 
 //Default value of Store.start_frame is false
 function on_start_button_click() {
-  animate_button.value = true;
-  setTimeout(() => {
-    // Store.start_frame.value = !Store.start_frame.value;
-  }, 400);
+  if (first_usage) {
+    Store.animate_button.value = !Store.animate_button.value;
+  }
 }
 </script>
-<style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-main {
-  width: 900px;
-  height: 600px;
-}
 
+<style>
 .starting_area {
   width: 900px;
   height: 419px;
@@ -65,9 +71,12 @@ main {
 .button_area {
   height: 181px;
   position: relative;
+  background: url("./../assets/icons/grid.png");
+  background-size: 100%;
+  background-position: bottom center;
 }
 
-.button_area button {
+.button_area .start {
   width: 90px;
   height: 51px;
   background: #f56b49;
@@ -78,11 +87,20 @@ main {
   bottom: 37px;
   right: 85px;
 }
+.button_area .start img {
+  transition: 0.5s;
+}
+.button_area .start img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
 
 .hide {
   animation: hide 0.5s ease forwards;
 }
-
+.show {
+  animation: show 0.5s ease forwards;
+}
 .to_circle {
   animation: to_circle 0.5s ease forwards, hide 0.5s ease forwards;
 }
@@ -94,6 +112,8 @@ main {
 .slide_down_button_area {
   animation: slide_down_button_area 0.5s ease forwards;
 }
+
+/* ANIMATIONS */
 @keyframes slide_down_button_area {
   0% {
     height: 181px;
@@ -129,5 +149,24 @@ main {
   100% {
     width: 51px;
   }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Global Classes */
+.button_area .view .img_background_frame {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 28px;
 }
 </style>
