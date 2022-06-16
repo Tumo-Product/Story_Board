@@ -7,7 +7,8 @@
     >
       <FirstFrame v-if="first_usage" />
       <EditBoard v-if="Store.edit_mode.value" />
-
+      <ViewBoard v-if="Store.view_mode.value" />
+      <PreviewBoards v-if="Store.preview_mode.value" />
       <div class="tool_name" :class="{ hide: Store.animate_button.value }">
         <h1>Story Telling</h1>
       </div>
@@ -30,6 +31,7 @@
       </button>
       <ViewButton />
       <ArrowButtons />
+      <SaveButton />
     </div>
   </main>
 </template>
@@ -38,8 +40,11 @@
 import Store from "@/Store.vue";
 import FirstFrame from "./FirstFrame";
 import EditBoard from "./EditBoard";
+import ViewBoard from "./ViewBoard";
+import PreviewBoards from "./PreviewBoards";
 import ViewButton from "./ViewButton";
 import ArrowButtons from "./ArrowButtons";
+import SaveButton from "./SaveButton";
 
 //Testing values need to be deleted
 let first_usage = true;
@@ -47,9 +52,8 @@ let first_usage = true;
 
 //Default value of Store.start_frame is false
 function on_start_button_click() {
-  if (first_usage) {
-    Store.animate_button.value = !Store.animate_button.value;
-  }
+  Store.animate_button.value = !Store.animate_button.value;
+  if (!first_usage) Store.edit_mode.value = true;
 }
 </script>
 
@@ -161,12 +165,13 @@ function on_start_button_click() {
 }
 
 /* Global Classes */
-.button_area .view .img_background_frame {
+.img_background_frame {
   height: 32px;
   width: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 28px;
+  transition: 0.5s;
 }
 </style>

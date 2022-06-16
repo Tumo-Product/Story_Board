@@ -1,7 +1,9 @@
 <template>
   <button
     class="view"
-    v-if="(Store.edit_mode.value || Store.view_mode.value) && Store.start.value"
+    v-if="
+      (Store.view_button.value || Store.edit_mode.value) && Store.start.value
+    "
     :class="{ show: Store.edit_mode }"
     @click="show_all_frames"
   >
@@ -50,13 +52,9 @@
 import Store from "@/Store.vue";
 
 function show_all_frames() {
-  if (Store.edit_mode.value) {
-    Store.edit_mode.value = false;
-    Store.view_mode.value = true;
-  } else {
-    Store.edit_mode.value = true;
-    Store.view_mode.value = false;
-  }
+  Store.edit_mode.value = false;
+  Store.view_mode.value = true;
+  Store.preview_mode.value = false;
 }
 </script>
 
@@ -77,10 +75,6 @@ function show_all_frames() {
 
 .button_area .view:hover .img_background_frame {
   background: #fff;
-}
-
-.button_area .view .img_background_frame {
-  transition: 0.5s;
 }
 
 .button_area .view:hover .img_background_frame svg {

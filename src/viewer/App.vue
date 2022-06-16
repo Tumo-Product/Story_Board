@@ -1,9 +1,9 @@
 <script setup>
-import StartButton from "./components/StartButton";
+import StartFrame from "./components/StartFrame";
 </script>
 
 <template>
-  <StartButton />
+  <StartFrame />
 </template>
 
 <style>
@@ -11,10 +11,12 @@ import StartButton from "./components/StartButton";
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 main {
   width: 900px;
   height: 600px;
+  overflow: hidden;
 }
 @font-face {
   font-family: "Fedra Sans Alt Pro";

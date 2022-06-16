@@ -4,7 +4,11 @@
     v-if="Store.view_mode.value"
     :class="{ show: Store.view_mode }"
   >
-    <button class="save">
+    <button
+      class="save"
+      @click="save"
+      :class="{ saved: Store.saved_status.value }"
+    >
       <img src="./../assets/icons/save.svg" alt="" />
     </button>
   </div>
@@ -12,6 +16,10 @@
 
 <script setup>
 import Store from "@/Store.vue";
+
+function save() {
+  Store.saved_status.value = !Store.saved_status.value;
+}
 </script>
 
 <style scoped>
@@ -37,5 +45,12 @@ import Store from "@/Store.vue";
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.saved {
+  left: 35px;
+  background: #b4f549 !important;
 }
 </style>

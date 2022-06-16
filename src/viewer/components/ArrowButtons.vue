@@ -4,17 +4,57 @@
     :class="{ show: Store.edit_mode }"
     v-if="Store.edit_mode.value"
   >
-    <button class="prev">
-      <img src="./../assets/icons/prev.svg" alt="" />
+    <button class="prev" @click="prev">
+      <div class="img_background_frame">
+        <svg
+          width="8"
+          height="12"
+          viewBox="0 0 8 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7 1L1 6L7 11"
+            stroke="white"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
     </button>
-    <button class="next">
-      <img src="./../assets/icons/next.svg" alt="" />
+    <button class="next" @click="next">
+      <div class="img_background_frame">
+        <svg
+          width="8"
+          height="12"
+          viewBox="0 0 8 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 1L7 6L1 11"
+            stroke="white"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
     </button>
   </div>
 </template>
 
 <script setup>
 import Store from "@/Store.vue";
+
+function next() {
+  if (Store.board_to_edit.value < Object.keys(Store.boards).length)
+    Store.board_to_edit.value += 1;
+}
+function prev() {
+  if (Store.board_to_edit.value > 1) Store.board_to_edit.value -= 1;
+}
 </script>
 
 <style scoped>
@@ -39,5 +79,15 @@ import Store from "@/Store.vue";
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.prev:hover .img_background_frame,
+.next:hover .img_background_frame {
+  background: #fff;
+}
+
+.prev:hover svg,
+.next:hover svg {
+  filter: invert(100%);
 }
 </style>

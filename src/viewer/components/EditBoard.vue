@@ -2,12 +2,12 @@
   <div class="working_space show">
     <div class="edit_frame">
       <div class="edit_board">
-        <div class="edit_id">01</div>
+        <div class="edit_id">0{{ current_board_id }}</div>
         <div class="board"></div>
       </div>
       <div class="edit_description">
         <!-- Input Vue -->
-        <InputFrame />
+        <InputFrame :id="current_board_id" />
       </div>
     </div>
     <!-- Assets Vue -->
@@ -20,11 +20,15 @@
 <script setup>
 import InputFrame from "./InputFrame";
 import EditFrameCategoriesVue from "./EditFrameCategories";
-import { onMounted } from "@vue/runtime-core";
+import { onMounted, watch } from "@vue/runtime-core";
+import { ref } from "vue";
 import Store from "@/Store.vue";
-
+let current_board_id = ref(Store.board_to_edit.value);
 onMounted(() => {
   Store.edit_mode.value = true;
+});
+watch(Store.board_to_edit, () => {
+  current_board_id.value = Store.board_to_edit.value;
 });
 </script>
 

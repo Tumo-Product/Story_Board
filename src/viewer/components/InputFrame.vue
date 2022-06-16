@@ -1,14 +1,19 @@
 <template>
-  <textarea maxlength="200" v-model="text"></textarea>
+  <textarea
+    maxlength="200"
+    v-model="Store.boards[props.id]['content'].value"
+  ></textarea>
   <div class="character_count">
-    {{ text.length }}/{{ Store.MAX_INPUT_LENGTH }}
+    {{ Store.boards[props.id]["content"].value.length }}/{{
+      Store.MAX_INPUT_LENGTH
+    }}
   </div>
 </template>
 
 <script setup>
 import Store from "@/Store.vue";
-import { ref } from "vue";
-let text = ref("");
+
+const props = defineProps(["id"]);
 </script>
 
 <style>
