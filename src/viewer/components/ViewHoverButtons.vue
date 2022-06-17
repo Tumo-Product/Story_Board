@@ -63,5 +63,6 @@ function preview_all_boards() {
   justify-content: center;
   align-items: center;
   opacity: 1 !important;
+  cursor: pointer;
 }
 </style>
