@@ -19,8 +19,15 @@
           {{ Store.boards[Store.slider_index.value]["content"].value }}
         </p>
       </div>
-      <div class="slider_index"></div>
     </div>
+  </div>
+  <div class="slider_index">
+    <span
+      v-for="index in Object.keys(Store.boards).length"
+      :key="index"
+      :class="{ active: Store.slider_index.value == index }"
+      @click="change_slide(index)"
+    ></span>
   </div>
 </template>
 
@@ -29,10 +36,11 @@ import Store from "@/Store.vue";
 import { ref } from "vue";
 let mouse_state = ref(false);
 let start = ref(0);
+
 let left = ref(
   Store.slider_index.value == 1
     ? 90
-    : -660 - (Store.slider_index.value - 2) * 740
+    : -630 - (Store.slider_index.value - 2) * 720
 );
 
 let startingLeft;
@@ -45,7 +53,9 @@ function toggle_mouse(event, val) {
     startingLeft = left.value;
   } else {
     const offset = startingLeft - left.value;
+
     if (!offset) return;
+
     if (Math.abs(offset) >= 10) {
       let dir = Math.sign(offset);
 
@@ -53,7 +63,7 @@ function toggle_mouse(event, val) {
       left.value =
         Store.slider_index.value == 1
           ? 90
-          : -660 - (Store.slider_index.value - 2) * 740;
+          : -630 - (Store.slider_index.value - 2) * 720;
     }
 
     startingLeft = undefined;
@@ -61,9 +71,26 @@ function toggle_mouse(event, val) {
 }
 
 function move_slide(event) {
+  if (
+    (Store.slider_index.value - 1 == 0 && event.clientX - start.value > 0) ||
+    (Store.slider_index.value + 1 == 7 && event.clientX - start.value < 0)
+  )
+    return;
   if (mouse_state.value) {
     left.value += event.clientX - start.value;
     start.value = event.clientX;
+
+    console.log(event.clientX - start.value);
+  }
+}
+
+function change_slide(index) {
+  if (Store.slider_index.value != index) {
+    Store.slider_index.value = index;
+    left.value =
+      Store.slider_index.value == 1
+        ? 90
+        : -630 - (Store.slider_index.value - 2) * 720;
   }
 }
 </script>
@@ -74,20 +101,18 @@ function move_slide(event) {
 }
 
 .preview_story_boards {
-  padding: 29px 0 18.5px 0;
+  padding: 29px 0 0 0;
   width: 100%;
-  height: 521px;
+  height: 481px;
   display: flex;
-  justify-content: space-between;
-  position: absolute;
-  column-gap: 20px;
+  /* justify-content: space-between;
+  -moz-column-gap: 20px;
+  column-gap: 20px; */
 }
 .preview_story {
   height: 452px;
   width: 721px;
   position: relative;
-  /* left: -604px;
-   */
   left: v-bind(left + "px");
   transform: scale(0.9);
   opacity: 0.3;
@@ -143,35 +168,11 @@ span {
   height: 3.5px;
   width: 9.23px;
   cursor: pointer;
+  transition: 0.5s;
 }
 
-/* .active {
+.active {
   width: 36.23px;
   background: #fff;
 }
-
-.active_board {
-  left: 90px;
-} */
-
-/* .right_slide {
-  left: 850px;
-  opacity: 0.3;
-  top: 43px;
-}
-
-.left_slide {
-  left: -670px;
-  opacity: 0.3;
-  top: 43px;
-}
-
-.right_slide .preview_board,
-.left_slide .preview_board {
-  height: 348.02px;
-}
-
-.none {
-  display: none;
-} */
 </style>
