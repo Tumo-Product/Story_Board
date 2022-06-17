@@ -16,10 +16,16 @@
 
 <script setup>
 import Store from "@/Store.vue";
-
+import { ref, watch } from "vue";
+let left = ref(0);
 function save() {
   Store.saved_status.value = !Store.saved_status.value;
 }
+
+watch(Store.saved_status, () => {
+  if (Store.saved_status.value) left.value = 35;
+  else left.value = 0;
+});
 </script>
 
 <style scoped>
@@ -47,10 +53,11 @@ function save() {
   justify-content: center;
   position: relative;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: ease-in-out 0.5s;
+  left: v-bind(left + "px");
 }
 .saved {
-  left: 35px;
+  /* left: 35px; */
   background: #b4f549 !important;
 }
 </style>

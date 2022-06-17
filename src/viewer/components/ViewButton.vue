@@ -71,6 +71,7 @@ function show_all_frames() {
   position: absolute;
   bottom: 21px;
   left: 42px;
+  cursor: pointer;
 }
 
 .button_area .view:hover .img_background_frame {

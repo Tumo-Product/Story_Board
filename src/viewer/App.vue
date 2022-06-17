@@ -11,7 +11,7 @@ import StartFrame from "./components/StartFrame";
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  user-select: none;
+  /* user-select: none; */
 }
 main {
   width: 900px;

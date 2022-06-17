@@ -79,6 +79,7 @@ function prev() {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .prev:hover .img_background_frame,

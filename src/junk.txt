@@ -1,8 +1,0 @@
- <span
-          v-for="index in Object.keys(Store.boards).length"
-          :key="index"
-          :class="{ active: Store.slider_index.value == index }"
-          @click="changeSlide(index)"
-        ></span>
-
-
